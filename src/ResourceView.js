@@ -3,7 +3,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css, jsx } from '@emotion/core'
-// import Markdown from 'markdown-to-jsx'
+import Markdown from 'markdown-to-jsx'
 
 import Icon from './Icon'
 
@@ -39,14 +39,6 @@ const style = css`
       padding: 0;
     }
   }
-
-  pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
-  }
 `
 
 const ResourceView = ({ resource, onClose }) => (
@@ -66,17 +58,13 @@ const ResourceView = ({ resource, onClose }) => (
 
       <h2>{(resource.about.name && resource.about.name.en) || resource._id}</h2>
 
-      {/* {Object.keys(resource.about.description).length > 0 && (
-        <Markdown>
-          {resource.about.description[Object.keys(resource.about.description).shift()]}
-        </Markdown>
-      )} */}
+        {(resource.about.description && Object.keys(resource.about.description).length > 0) && (
+          <Markdown>
+            {resource.about.description[Object.keys(resource.about.description).shift()]}
+          </Markdown>
+        )}
       </>
     )}
-
-    <pre>
-      {JSON.stringify(resource, null, 2)}
-    </pre>
   </div>
 )
 
