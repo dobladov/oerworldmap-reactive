@@ -9,7 +9,8 @@ import {
   ReactiveList,
   ToggleButton,
   DataSearch,
-  MultiList
+  MultiList,
+  SelectedFilters
 } from '@appbaseio/reactivesearch'
 
 import globalStyles from './styles/globalStyles'
@@ -35,14 +36,14 @@ class App extends Component {
     }
     this.subFilters = [
       {
-        componentId: 'keywordsList',
+        componentId: 'filter.about.keyword',
         dataField: 'about.keywords',
         showMissing: true,
         showSearch: true,
         title: 'Tag'
       },
       {
-        componentId: 'countryList',
+        componentId: 'filter.about.location.address.addressCountry',
         dataField: 'about.location.address.addressCountry',
         showSearch: false,
         title: 'Country',
@@ -54,7 +55,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'regionList',
+        componentId: 'filter.about.location.address.addressRegion',
         dataField: 'about.location.address.addressRegion',
         showSearch: false,
         title: 'Region',
@@ -66,7 +67,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'languageList',
+        componentId: 'filter.about.availableChannel.availableLanguage',
         dataField: 'about.availableChannel.availableLanguage',
         showSearch: false,
         title: 'Language',
@@ -78,7 +79,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'subtypeList',
+        componentId: 'filter.about.additionalType.@id',
         dataField: 'about.additionalType.@id',
         showSearch: false,
         title: 'Sub-Categories',
@@ -90,7 +91,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'audienceList',
+        componentId: 'filter.about.audience.@id',
         dataField: 'about.audience.@id',
         showSearch: false,
         title: 'Audience',
@@ -102,7 +103,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'primarySectorList',
+        componentId: 'filter.about.primarySector.@id',
         dataField: 'about.primarySector.@id',
         showSearch: false,
         title: 'Primary Sector',
@@ -114,7 +115,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'secondarySectorList',
+        componentId: 'filter.about.secondarySector.@id',
         dataField: 'about.secondarySector.@id',
         showSearch: false,
         title: 'Secondary Sector',
@@ -126,7 +127,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'awardList',
+        componentId: 'filter.about.award',
         dataField: 'about.award',
         showSearch: false,
         title: 'Award',
@@ -138,7 +139,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'licenseList',
+        componentId: 'filter.about.license.@id',
         dataField: 'about.license.@id',
         showSearch: false,
         title: 'License',
@@ -150,7 +151,7 @@ class App extends Component {
         )
       },
       {
-        componentId: 'subjectList',
+        componentId: 'filter.about.about.@id',
         dataField: 'about.about.@id',
         showSearch: false,
         title: 'Subject',
@@ -162,14 +163,14 @@ class App extends Component {
         )
       },
       {
-        componentId: 'activityFieldList',
+        componentId: 'filter.about.activityField.@id',
         dataField: 'about.activityField.@id',
         showSearch: false,
         title: 'Field of Activity'
       }
     ]
 
-    this.filterIDs = ['nameSearch', 'typeSearch'].concat(this.subFilters.map(filter => filter.componentId))
+    this.filterIDs = ['q', 'filter.about.@type'].concat(this.subFilters.map(filter => filter.componentId))
     this.subFilters = this.subFilters.map(filter => {
       filter.react = {
         and: this.filterIDs.filter(id => id !== filter.componentId)
@@ -216,21 +217,23 @@ class App extends Component {
 
             <DataSearch
               className="nameSearch"
-              componentId="nameSearch"
-              dataField="about.name.en"
+              componentId="q"
+              dataField={['about.name.*', 'about.description.*']}
               placeholder="Search the OER"
+              URLParams
               react={ {
-                and: this.filterIDs.filter(id => id !== 'nameSearch')
+                and: this.filterIDs.filter(id => id !== 'q')
               }}
             />
 
             <ToggleButton
               className="typeSearch"
-              componentId="typeSearch"
+              componentId="filter.about.@type"
               dataField="about.@type"
-              multiSelect={true}
+              URLParams
+              multiSelect={false}
               react={ {
-                and: this.filterIDs.filter(id => id !== 'typeSearch')
+                and: this.filterIDs.filter(id => id !== 'filter.about.@type')
               }}
               data={toggleButtons}
             />
@@ -258,6 +261,8 @@ class App extends Component {
               render={({ data, resultStats }) => (
                   <>
                   <h4>{resultStats.numberOfResults} Found</h4>
+                  <SelectedFilters />
+                  <br/>
                   <div className="columns">
                     <aside
                       style={{
@@ -268,6 +273,7 @@ class App extends Component {
                         <MultiList
                           key={filter.componentId} className="FilterBox"
                           {...filter}
+                          URLParams
                         />
                       ))}
 
