@@ -63,6 +63,10 @@ const ResourceView = ({ resource, onClose }) => (
             {resource.about.description[Object.keys(resource.about.description).shift()]}
           </Markdown>
         )}
+
+        <pre>
+          {JSON.stringify(resource, null, 2)}
+        </pre>
       </>
     )}
   </div>

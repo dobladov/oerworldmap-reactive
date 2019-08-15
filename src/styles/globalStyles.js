@@ -22,6 +22,14 @@ const globalStyles = css`
   svg {
       fill: #005986;
   }
+
+  pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+  }
 `
 
 export default globalStyles
