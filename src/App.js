@@ -239,15 +239,17 @@ class App extends Component {
                       }
                   }
               })}
-              render={({ aggregations, setQuery }) => (
-                  <CountryPickerWrapper
-                      aggregations={aggregations}
-                      setQuery={setQuery}
-                  />
-              )}
-              react={ {
-                and: this.filterIDs
+              render={(props) => {
+                const { aggregations, setQuery } = props
+                console.log("PROPS", props)
+                return (
+                    <CountryPickerWrapper
+                        aggregations={aggregations}
+                        setQuery={setQuery}
+                    />
+                )
               }}
+
             />
 
             <ToggleButton
