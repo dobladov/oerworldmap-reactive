@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@appbaseio/reactivesearch": "^3.0.0-rc.22",
+    "@appbaseio/reactivesearch": "^3.1.1",
     "@emotion/core": "^10.0.14",
     "@fortawesome/fontawesome-free": "^5.10.1",
     "markdown-to-jsx": "^6.10.3",

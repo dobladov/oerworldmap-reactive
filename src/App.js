@@ -10,7 +10,8 @@ import {
   ToggleButton,
   DataSearch,
   MultiList,
-  SelectedFilters
+  SelectedFilters,
+  ReactiveComponent,
 } from '@appbaseio/reactivesearch'
 
 import globalStyles from './styles/globalStyles'
@@ -24,6 +25,7 @@ import style from './styles/App.css.js'
 import Icon from './Icon'
 import ResourceView from './ResourceView'
 import ResultList from './ResultList'
+import CountryPickerWrapper from './CountryPickerWrapper'
 
 const { ELASTICSEARCH_INDEX } = process.env
 const { ELASTICSEARCH_URL } = process.env
@@ -223,6 +225,28 @@ class App extends Component {
               URLParams
               react={ {
                 and: this.filterIDs.filter(id => id !== 'q')
+              }}
+            />
+
+            <ReactiveComponent
+              componentId="myCountryPicker"
+              defaultQuery={() => ({
+                  aggs: {
+                      color: {
+                          terms: {
+                              field: 'about.location.address.addressCountry'
+                          }
+                      }
+                  }
+              })}
+              render={({ aggregations, setQuery }) => (
+                  <CountryPickerWrapper
+                      aggregations={aggregations}
+                      setQuery={setQuery}
+                  />
+              )}
+              react={ {
+                and: this.filterIDs
               }}
             />
 
