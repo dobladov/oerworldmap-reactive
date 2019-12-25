@@ -11,10 +11,13 @@ jobs:
 
     steps:
     - name: Checkout
-    - uses: actions/checkout@v1
-      
-    - name: Build and deploy
-      run: |
+      uses: actions/checkout@v1
+    
+    - name: Build
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x' 
+    - run: |
         npm install
         npm install npx
         npx parcel build --public-url /oerworldmap-reactive src/index.html
