@@ -6,30 +6,31 @@
   "scripts": {
     "test": "eslint src",
     "start": "parcel --host 0.0.0.0 src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "deploy": "parcel build --public-url /oerworldmap-reactive src/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@appbaseio/reactivesearch": "^3.0.0-rc.22",
-    "@emotion/core": "^10.0.14",
-    "@fortawesome/fontawesome-free": "^5.10.1",
+    "@appbaseio/reactivesearch": "^3.1.3",
+    "@emotion/core": "^10.0.27",
+    "@fortawesome/fontawesome-free": "^5.12.0",
     "markdown-to-jsx": "^6.10.3",
-    "parcel-bundler": "^1.12.3",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-inlinesvg": "^0.1.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
-    "eslint": "^6.1.0",
-    "eslint-config-standard": "^13.0.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.1.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-standard": "^4.0.0"
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-standard": "^4.0.1"
   }
 }
